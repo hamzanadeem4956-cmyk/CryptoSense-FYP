@@ -26,7 +26,7 @@ app.use(express.json());
 app.use("/uploads", express.static(path.join(__dirname, "uploads")));
 
 app.get("/", (req, res) => {
-  res.json({ message: "CryptoSence API is running" });
+  res.json({ message: "CryptoSence API is running sucessfully" });
 });
 
 app.get("/api/health", (req, res) => {
