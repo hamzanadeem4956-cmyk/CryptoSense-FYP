@@ -1,6 +1,8 @@
 import React, { useEffect, useState } from "react";
 import { useNavigate, useParams } from "react-router-dom";
 
+const API_BASE = import.meta.env.VITE_API_URL || "http://localhost:5000";
+
 function VerifyEmail() {
   const { token } = useParams();
   const navigate = useNavigate();
@@ -11,7 +13,7 @@ function VerifyEmail() {
     const verify = async () => {
       try {
         const response = await fetch(
-          `http://localhost:5000/api/auth/verify-email/${token}`,
+          `${API_BASE}/api/auth/verify-email/${token}`,
           {
             method: "POST",
             headers: {

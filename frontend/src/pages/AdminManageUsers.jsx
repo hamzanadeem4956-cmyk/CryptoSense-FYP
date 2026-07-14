@@ -107,11 +107,11 @@ function AdminManageUsers() {
   };
 
   return (
-    <div className="min-h-screen bg-[#050b16] text-white p-4 md:p-6">
-      <div className="max-w-7xl mx-auto grid grid-cols-1 md:grid-cols-[280px_1fr] gap-6">
+    <div className="min-h-screen bg-[#050b16] text-white overflow-x-hidden">
+      <div className="max-w-7xl mx-auto flex flex-col md:flex-row md:gap-6 p-4 md:p-6">
         <AdminSidebar />
 
-        <main className="bg-[#0b1220] border border-white/10 rounded-2xl p-5 md:p-6 shadow-lg">
+        <main className="min-w-0 flex-1 mt-4 md:mt-0 bg-[#0b1220] border border-white/10 rounded-2xl p-5 md:p-6 shadow-lg">
           <div className="flex items-center justify-between flex-wrap gap-3 mb-6">
             <h1 className="text-3xl font-bold">Manage Users</h1>
             <p className="text-sm text-slate-400">Only normal users are shown here</p>

@@ -195,8 +195,8 @@ function MarketingStrategyMaker() {
   };
 
   return (
-    <div className="min-h-screen bg-[#050b16] text-white flex flex-col">
-      <div className="flex flex-1">
+    <div className="min-h-screen bg-[#050b16] text-white flex flex-col overflow-x-hidden">
+      <div className="flex flex-1 flex-col md:flex-row min-w-0">
         <MarketingSidebar />
 
         <main className="flex-1 px-4 py-6 md:px-6 lg:px-8">
@@ -468,7 +468,6 @@ function MarketingStrategyMaker() {
         </main>
       </div>
 
-      <Footer />
     </div>
   );
 }

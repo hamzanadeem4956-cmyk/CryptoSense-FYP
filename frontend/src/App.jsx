@@ -6,7 +6,7 @@ import Home from "./pages/Home";
 import Login from "./pages/Login";
 import Register from "./pages/Register";
 import ForgotPassword from "./pages/ForgotPassword";
-import ChangePassword from "./pages/ChangePassword";
+import ResetPassword from "./pages/ResetPassword";
 
 import Dashboard from "./pages/Dashboard";
 import Cryptobot from "./pages/Cryptobot";
@@ -37,7 +37,7 @@ function App() {
         <Route path="/login" element={<Login />} />
         <Route path="/register" element={<Register />} />
         <Route path="/forgot-password" element={<ForgotPassword />} />
-        <Route path="/change-password" element={<ChangePassword />} />
+        <Route path="/reset-password/:token" element={<ResetPassword />} />
 
         <Route path="/privacy-policy" element={<Privacy />} />
         <Route path="/terms-of-service" element={<TermsOfService />} />
