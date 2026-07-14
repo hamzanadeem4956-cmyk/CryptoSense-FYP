@@ -81,6 +81,33 @@ function AdminManageUsers() {
     }
   };
 
+  const updateSubscription = async (id, subscriptionStatus) => {
+    try {
+      const res = await fetch(
+        `http://localhost:5000/api/admin/users/${id}/subscription`,
+        {
+          method: "PUT",
+          headers: {
+            "Content-Type": "application/json",
+            Authorization: `Bearer ${token}`,
+          },
+          body: JSON.stringify({ subscriptionStatus }),
+        }
+      );
+
+      const data = await res.json();
+
+      if (!res.ok) {
+        throw new Error(data.message || "Subscription update failed");
+      }
+
+      setMessage(data.message);
+      fetchUsers();
+    } catch (error) {
+      setMessage(error.message);
+    }
+  };
+
   const deleteUser = async (id) => {
     const confirmDelete = window.confirm("Are you sure you want to delete this user?");
     if (!confirmDelete) return;
@@ -151,11 +178,30 @@ function AdminManageUsers() {
                     </div>
                   </div>
 
-                  <div className="mt-3">
-                    <p className="text-slate-400 text-sm">Status</p>
-                    <p className={`font-semibold ${user.isBlocked ? "text-red-400" : "text-green-400"}`}>
-                      {user.isBlocked ? "Blocked" : "Active"}
-                    </p>
+                  <div className="mt-3 grid gap-3 sm:grid-cols-2">
+                    <div>
+                      <p className="text-slate-400 text-sm">Status</p>
+                      <p className={`font-semibold ${user.isBlocked ? "text-red-400" : "text-green-400"}`}>
+                        {user.isBlocked ? "Blocked" : "Active"}
+                      </p>
+                    </div>
+
+                    <div>
+                      <p className="text-slate-400 text-sm">Subscription</p>
+                      <p
+                        className={`font-semibold capitalize ${
+                          user.subscriptionStatus === "active"
+                            ? "text-emerald-400"
+                            : user.subscriptionStatus === "expired"
+                            ? "text-yellow-400"
+                            : user.subscriptionStatus === "cancelled"
+                            ? "text-rose-400"
+                            : "text-slate-400"
+                        }`}
+                      >
+                        {user.subscriptionStatus || "inactive"}
+                      </p>
+                    </div>
                   </div>
 
                   <div className="mt-5 flex flex-wrap gap-3">
@@ -172,6 +218,22 @@ function AdminManageUsers() {
                         className="rounded-lg bg-green-600 px-4 py-2 text-sm font-medium hover:bg-green-700"
                       >
                         Unblock
+                      </button>
+                    )}
+
+                    {user.subscriptionStatus === "active" ? (
+                      <button
+                        onClick={() => updateSubscription(user._id, "cancelled")}
+                        className="rounded-lg bg-rose-700 px-4 py-2 text-sm font-medium hover:bg-rose-800"
+                      >
+                        Cancel Subscription
+                      </button>
+                    ) : (
+                      <button
+                        onClick={() => updateSubscription(user._id, "active")}
+                        className="rounded-lg bg-cyan-600 px-4 py-2 text-sm font-medium hover:bg-cyan-700"
+                      >
+                        Activate Subscription
                       </button>
                     )}
 
